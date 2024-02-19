@@ -133,8 +133,8 @@ def get_route(message):
 
     deleter(chat_id, message.id)
     for i in drivers:
-        if (drivers[i]["Route"]):
-            send_message(chat_id, f'Машина - {drivers[i]["Car"]} на маршруте', parse_mode='html')
+        if (i["Route"]):
+            send_message(chat_id, f'Машина - {i["Car"]} на маршруте', parse_mode='html')
     markup = types.InlineKeyboardMarkup()
     markup.add(types.InlineKeyboardButton("Назад", callback_data=f'main_menu'))
     send_message(chat_id, "Вернуться в меню", reply_markup=markup)
