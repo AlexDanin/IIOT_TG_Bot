@@ -34,10 +34,10 @@ def main_message(message):
         btn2 = types.InlineKeyboardButton('Список всех авто', callback_data='get_cars')
         btn3 = types.InlineKeyboardButton('Текущее состояние авто', callback_data='get_data_from_auto')
         btn4 = types.InlineKeyboardButton('Машины в пути', callback_data='get_route')
-        btn5 = types.InlineKeyboardButton('Статистика по водителям', callback_data='get_driver_statistic')
+        # btn5 = types.InlineKeyboardButton('Статистика по водителям', callback_data='get_driver_statistic')
         markup.row(btn1, btn2)
         markup.row(btn3, btn4)
-        markup.add(btn5)
+        # markup.add(btn5)
         send_message(chat_id, 'Выберите дальнейшее действие', reply_markup=markup)
         deleter(chat_id, message.id)
 
