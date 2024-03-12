@@ -1,5 +1,6 @@
 from telebot import TeleBot
 import json
+from pathlib import Path
 
 token = '6821919054:AAGcj-d94HKSl8REdyJzRI-ahCmTDJDol-8'
 bot = TeleBot(token)
@@ -86,6 +87,90 @@ def deleter_message(chat_id, message_id, count_del=1):
             continue
 
 
+def get_app(company):
+    with open("data/Ankets.json", "r", encoding="utf-8") as json_file:
+        file_ = json.load(json_file)
+        ans = ""
+        for i in file_:
+            if company in i["Company"]:
+                ans += f"ID анкеты = {str(i['Anket_id'])} Статус = {i['Status']}\n"
+        return ans
+
+
+def get_rej_app(company):
+    with open("data/Ankets.json", "r", encoding="utf-8") as json_file:
+        file_ = json.load(json_file)
+        list_ = [i for i in file_ if company in i["Company"] and i["Status"] == "Отклонён"]
+    with open("data/Drivers.json", "r", encoding="utf-8") as json_file2:
+        file_2 = json.load(json_file2)
+    ans_ = ""
+    for j in list_:
+        ans_ += f"ID анкеты = {j['Anket_id']} ФИО водителя = {file_2[int(j['Anket_id']-1)]['Full_name']}\n"
+    return str(ans_)
+
+
+def get_g_app(company):
+    with open("data/Ankets.json", "r", encoding="utf-8") as json_file:
+        file_ = json.load(json_file)
+        list_ = [i for i in file_ if company in i["Company"] and i["Status"] == "Удтверждён"]
+    with open("data/Drivers.json", "r", encoding="utf-8") as json_file2:
+        file_2 = json.load(json_file2)
+    ans_ = ""
+    for j in list_:
+        ans_ += f"ID анкеты = {j['Anket_id']} ФИО водителя = {file_2[int(j['Anket_id']-1)]['Full_name']}\n"
+    return str(ans_)
+
+
+def get_unw_app(company):
+    with open("data/Ankets.json", "r", encoding="utf-8") as json_file:
+        file_ = json.load(json_file)
+        return [i for i in file_ if str(company) in i["Company"] and i["Status"] == "На рассмотрении"]
+
+
+def rej_applications_(message, anket_id):
+    with open('data/Ankets.json', 'r', encoding='utf-8') as f:
+        data = json.load(f)
+    data[int(anket_id)-1]['Status'] = 'Отклонён'
+    with open('data/Ankets.json', 'w', encoding='utf-8') as f:
+        json.dump(data, f, ensure_ascii=False)
+
+
+def proof_applications_(chat_id, anket_id):
+    with open('data/Ankets.json', 'r', encoding='utf-8') as f:
+        data = json.load(f)
+    data[int(anket_id)-1]['Status'] = 'Удтверждён'
+    driver_id = data[int(anket_id)-1]['driver_id']
+
+    with open('data/Ankets.json', 'w', encoding='utf-8') as f:
+        json.dump(data, f, ensure_ascii=False)
+    with open("data/Drivers.json", "r", encoding="utf-8") as json_file:
+        driver_file = json.load(json_file)
+
+    for i in range(len(driver_file)):
+        if driver_file[i]["ID"] == driver_id:
+            driver_file[i]["Company"] = get_name_company(chat_id)
+            break
+
+    with open('data/Drivers.json', 'w', encoding='utf-8') as f:
+        json.dump(driver_file, f, ensure_ascii=False)
+    # path = Path('data/Ankets.json')
+    # data = json.loads(path.read_text(encoding='utf-8'))
+    # print(data[int(anket_id)-1]['Driver_id'])
+    # print(f"ФИО водителя = {driver_file[int(data[int(anket_id)-1]['Driver_id']-1)]['Full_name']}")
+    # data['frames'].append({"Birthday": data[int(anket_id)-1]['Driver_id']})
+    # path.write_text(json.dumps(data), encoding='utf-8')
+
+
+def get_one_anket(anket_id):
+    with open("data/Ankets.json", "r", encoding="utf-8") as json_file:
+        file_ = json.load(json_file)
+        driver_id = file_[int(anket_id)-1]["driver_id"]
+    with open("data/Drivers.json", "r", encoding="utf-8") as json_file2:
+        file_2 = json.load(json_file2)
+        driver = file_2[driver_id-1]["Full_name"]
+    return f"ID анкеты = {anket_id} ФИО водителя = {driver}"
+
+
 def get_name_company(chat_id):
     with open("sign_in_users_owner.json", "r", encoding="utf-8") as json_file:
         number = json.load(json_file)[str(chat_id)]
@@ -93,6 +178,13 @@ def get_name_company(chat_id):
         company = json.load(json_file)[number]["Company"]
     with open("data/Companies.json", "r", encoding="utf-8") as json_file:
         return json.load(json_file)[company]
+
+
+def get_number_company(chat_id):
+    with open("sign_in_users_owner.json", "r", encoding="utf-8") as json_file:
+        number = json.load(json_file)[str(chat_id)]
+    with open("data/Owners.json", "r", encoding="utf-8") as json_file:
+        return json.load(json_file)[number]["Company"]
 
 
 def get_drivers_data(chat_id):

@@ -1,0 +1,44 @@
+[
+  {
+    "Birthday": "23.06.2000",
+    "Full_name": "Имя Фамилия Отчество",
+    "ID": 1,
+    "Login": "5",
+    "Password": "55"
+  },
+  {
+    "Birthday": "12.08.2000",
+    "Full_name": "ФИО2",
+    "ID": 2,
+    "Login": "8",
+    "Password": "88"
+  },
+  {
+    "Birthday": "28.11.2003",
+    "Full_name": "Данин Алексей Антонович",
+    "ID": 3,
+    "Login": "Tesla",
+    "Password": "123321123"
+  },
+  {
+    "Birthday": "1",
+    "Full_name": "ООО",
+    "ID": 4,
+    "Login": "4",
+    "Password": "4"
+  },
+  {
+    "Birthday": "28.11.2003",
+    "Full_name": "Данин Алексей Антонович",
+    "ID": 5,
+    "Login": "qwerty",
+    "Password": "12345"
+  },
+  {
+    "Birthday": "ооо",
+    "Full_name": "ООО",
+    "ID": 6,
+    "Login": "о",
+    "Password": "о"
+  }
+]

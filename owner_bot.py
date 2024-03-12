@@ -1,6 +1,7 @@
 from telebot import types
 from functions_owner_for_json import *
 from random import randint
+from IoTRightechMain import get_state
 
 
 @bot.message_handler(commands=['start'])
@@ -34,10 +35,10 @@ def main_message(message):
         btn2 = types.InlineKeyboardButton('Список всех авто', callback_data='get_cars')
         btn3 = types.InlineKeyboardButton('Текущее состояние авто', callback_data='get_data_from_auto')
         btn4 = types.InlineKeyboardButton('Машины в пути', callback_data='get_route')
-        # btn5 = types.InlineKeyboardButton('Статистика по водителям', callback_data='get_driver_statistic')
+        btn6 = types.InlineKeyboardButton('Заявки', callback_data='get_applications')
         markup.row(btn1, btn2)
         markup.row(btn3, btn4)
-        # markup.add(btn5)
+        markup.add(btn6)
         send_message(chat_id, 'Выберите дальнейшее действие', reply_markup=markup)
         deleter(chat_id, message.id)
 
@@ -69,6 +70,12 @@ def callback_message(callback):
         get_wheel_data(message, call_funk.split()[1], call_funk.split()[2])
     elif "statistic" in call_funk:
         get_statistic(message, call_funk.split()[1], call_funk.split()[2])
+    elif 'anket' in call_funk:
+        one_unwatched_anket(message, call_funk.split()[1])
+    elif 'rej_applications' in call_funk:
+        rej_applications(message, call_funk.split()[1])
+    elif 'proof_applications' in call_funk:
+        proof_applications(message, call_funk.split()[1])
     else:
         match call_funk:
             case 'sign_in':
@@ -83,12 +90,110 @@ def callback_message(callback):
                 get_data_car(message)
             case 'get_route':
                 get_route(message)
-            case 'get_driver_statistic':
-                get_driver_statistic(message)
+            # case 'get_driver_statistic':
+            #     get_driver_statistic(message)
+            case 'get_applications':
+                get_applications(message)
+            case 'all_app':
+                get_all_app(message)
+            case 'rejected_app':
+                get_rejected_app(message)
+            case 'good_app':
+                get_good_app(message)
+            case 'unwatched_app':
+                get_unwatched_app(message)
 
 
-def get_driver_statistic(message):
+def get_applications(message):
     chat_id = message.chat.id
+    markup = types.InlineKeyboardMarkup()
+    btn1 = types.InlineKeyboardButton('Одобренные заявления', callback_data='good_app')
+    btn2 = types.InlineKeyboardButton('Все', callback_data='all_app')
+    btn3 = types.InlineKeyboardButton('Непросмотренные', callback_data='unwatched_app')
+    btn4 = types.InlineKeyboardButton('Отвергнутые', callback_data='rejected_app')
+    btn5 = types.InlineKeyboardButton('Назад', callback_data='main_menu')
+    markup.row(btn1, btn2)
+    markup.row(btn3, btn4)
+    markup.add(btn5)
+    send_message(chat_id, 'Выберите категорию заявлений', reply_markup=markup)
+    deleter(chat_id, message.id)
+
+
+def get_all_app(message):
+    chat_id = message.chat.id
+    company = get_number_company(chat_id)
+    markup = types.InlineKeyboardMarkup()
+    btn1 = types.InlineKeyboardButton('Назад', callback_data='get_applications')
+    markup.add(btn1)
+    send_message(chat_id, get_app(company), reply_markup=markup)
+    # TODO: норм вывод
+
+
+def get_rejected_app(message):
+    chat_id = message.chat.id
+    company = get_number_company(chat_id)
+    markup = types.InlineKeyboardMarkup()
+    btn1 = types.InlineKeyboardButton('Назад', callback_data='get_applications')
+    markup.add(btn1)
+    send_message(chat_id, get_rej_app(company), reply_markup=markup)
+
+
+def get_good_app(message):
+    chat_id = message.chat.id
+    company = get_number_company(chat_id)
+    markup = types.InlineKeyboardMarkup()
+    btn1 = types.InlineKeyboardButton('Назад', callback_data='get_applications')
+    markup.add(btn1)
+    send_message(chat_id, get_g_app(company), reply_markup=markup)
+    deleter(chat_id, message.id)
+
+
+# TODO: потом эти 3 функции можно будет красиво свернуть в одну
+
+
+def get_unwatched_app(message):
+    chat_id = message.chat.id
+    company = get_number_company(chat_id)
+    markup = types.InlineKeyboardMarkup()
+    btn1 = types.InlineKeyboardButton('Назад', callback_data='get_applications')
+    markup.add(btn1)
+    list_apps = get_unw_app(company)
+    for i in list_apps:
+        markup.add(types.InlineKeyboardButton(f"Анкета № {i['Anket_id']}", callback_data=f'anket {i["Anket_id"]}'))
+    send_message(chat_id, "Выберите нужный вам номер анкеты", reply_markup=markup)
+    deleter(chat_id, message.id)
+
+
+def one_unwatched_anket(message, anket_id):
+    chat_id = message.chat.id
+    markup = types.InlineKeyboardMarkup()
+    btn1 = types.InlineKeyboardButton('Назад', callback_data='get_applications')
+    btn2 = types.InlineKeyboardButton('Отклонить', callback_data=f'rej_applications {anket_id}')
+    btn3 = types.InlineKeyboardButton('Подтвердить', callback_data=f'proof_applications {anket_id}')
+    markup.add(btn1)
+    markup.add(btn2)
+    markup.add(btn3)
+    send_message(chat_id, get_one_anket(anket_id), reply_markup=markup)
+    deleter(chat_id, message.id)
+# TODO: КНОПКИ НЕ РАБОТАЮТ
+
+
+def rej_applications(message, anket_id):
+    chat_id = message.chat.id
+    rej_applications_(message, anket_id)
+    deleter(chat_id, message_id)
+    send_message(chat_id, "Вы успешно отклонили заявку")
+    get_unwatched_app(message)
+    deleter(chat_id, message.id)
+
+
+def proof_applications(message, anket_id):
+    chat_id = message.chat.id
+    proof_applications_(chat_id, anket_id)
+    deleter(chat_id, message_id)
+    send_message(chat_id, "Вы успешно подтвердили заявку")
+    get_unwatched_app(message)
+    deleter(chat_id, message.id)
 
 
 def get_statistic(message, time, car_id):
@@ -193,10 +298,17 @@ def get_current_state_data(message, value):
 
     num = int(get_car_wheels(value))
     markup = types.InlineKeyboardMarkup()
-    for i in range(1, num + 1, 2):
-        b1 = types.InlineKeyboardButton(f"№ {i} | T = 26°С | P = 6 Бар", callback_data=f'wheel {i} {value}')
-        b2 = types.InlineKeyboardButton(f"№ {i + 1} | T = 26°С | P = 6 Бар", callback_data=f'wheel {i + 1} {value}')
+
+    for i in range(1, 6, 2):
+        data = get_state(i)
+        print(data)
+        b1 = types.InlineKeyboardButton(f"№ {i} | {str(data[0])}°С | {str(data[1])} Бар", callback_data=f'wheel {i} {value}')
+        data2 = get_state(i + 1)
+        b2 = types.InlineKeyboardButton(f"№ {i + 1} | {str(data2[0])}°С | {str(data2[1])} Бар", callback_data=f'wheel {i + 1} {value}')
+        # b1 = types.InlineKeyboardButton(f"№ {i} | T = 26°С | P = 6 Бар", callback_data=f'wheel {i} {value}')
+        # b2 = types.InlineKeyboardButton(f"№ {i + 1} | T = 26°С | P = 6 Бар", callback_data=f'wheel {i + 1} {value}')
         markup.row(b1, b2)
+
     send_message(chat_id, f"🚗 Данные по машине с номером - {value}", parse_mode='html', reply_markup=markup)
     markup1 = types.InlineKeyboardMarkup()
     b1 = types.InlineKeyboardButton(f"неделю", callback_data=f'statistic week {value}')

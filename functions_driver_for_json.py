@@ -14,21 +14,52 @@ def is_company(login):
         return str(login) in registered_users.values()
 
 
+def get_company_id(company):
+    with open('data/Companies.json', 'r', encoding='utf-8') as file:
+        company_ = json.load(file)
+        for k, v in company_.items():
+            if v == company:
+                return k
+
+
 # Функция для проверки, зарегистрирован ли пользователь
-def is_registered(login, company):
+
+
+def is_registered(login):
     with open('data/Drivers.json', 'r', encoding='utf-8') as file:
         registered_users = json.load(file)
         for i in registered_users:
-            if i["Login"] == login and i["Company"] == company:
+            if i["Login"] == login:
                 return True
         return False
 
 
-def is_acreditation(passwd, login, company):
+def is_password_login(login, password):
     with open('data/Drivers.json', 'r', encoding='utf-8') as file:
         registered_users = json.load(file)
         for i in registered_users:
-            if i["Login"] == login and i["Company"] == company and i["Password"] == passwd:
+            if i["Login"] == login and i["Password"] == password:
+                return True
+        return False
+
+
+def is_not_work(login, password):
+    with open('data/Drivers.json', 'r', encoding='utf-8') as file:
+        registered_users = json.load(file)
+        for i in registered_users:
+            print("login", i["Login"] == login, "Password", i["Password"] == password)
+            print(i["Company"] == "" and i["Login"] == login and i["Password"] == password)
+            if i["Company"] == "" and i["Login"] == login and i["Password"] == password:
+                print("YES")
+                return True
+        return False
+
+
+def is_acreditation(login, passwd):
+    with open('data/Drivers.json', 'r', encoding='utf-8') as file:
+        registered_users = json.load(file)
+        for i in registered_users:
+            if i["Login"] == login and i["Password"] == passwd:
                 return True
         return False
 
@@ -37,6 +68,13 @@ def is_sign_in(chat_id):
     with open('sign_in_users_driver.json', 'r', encoding='utf-8') as file:
         registered_users = json.load(file)
         return str(chat_id) in list(registered_users.keys())
+
+
+def all_companies():
+    print("YES")
+    with open("data/Companies.json", "r", encoding="utf-8") as json_file:
+        file_ = json.load(json_file)
+        return ', '.join(list(file_.values()))
 
 
 def get_sign_in_user(chat_id):
@@ -99,11 +137,11 @@ def deleter_message(chat_id, message_id, count_del=1):
             continue
 
 
-def add_new_defects(dict):
-    with open("data/Defects.json", "r", encoding='utf-8') as json_file:
+def add_to_file(file, dict_):
+    with open(file, "r", encoding='utf-8') as json_file:
         data = json.load(json_file)
-    data.append(dict)
-    json.dump(data, open('data/Defects.json', 'w', encoding='utf-8'), ensure_ascii=False)
+    data.append(dict_)
+    json.dump(data, open(file, 'w', encoding='utf-8'), ensure_ascii=False)
 
 
 def get_driver(chat_id):
@@ -120,6 +158,12 @@ def get_car(chat_id):
         for i in registered_users:
             if i["Login"] == login:
                 return i["Car"]
+
+
+def get_id(file_, name):
+    with open(file_, "r", encoding='utf-8') as json_file:
+        file = json.load(json_file)
+        return file[len(file) - 1][name] + 1
 
 
 def get_driver_data(chat_id):
@@ -157,3 +201,33 @@ def set_car(chat_id, car):
                 driver[i]["Car"] = car
                 json.dump(driver, open('data/Drivers.json', 'w', encoding='utf-8'), ensure_ascii=False)
                 return
+
+
+def get_driver_status(chat_id):
+    with open("sign_in_users_driver.json", "r", encoding='utf-8') as json_file:
+        login = json.load(json_file)[str(chat_id)]
+
+    driver_id = 0
+    with open('data/Drivers.json', 'r', encoding='utf-8') as file:
+        driver = json.load(file)
+    for i in range(len(driver)):
+        if driver[i]["Login"] == login:
+            driver_id = driver[i]["ID"]
+    print(driver_id)
+    with open('data/Ankets.json', 'r', encoding='utf-8') as file:
+        anketa = json.load(file)
+    for i in range(len(anketa)):
+        if anketa[i]["driver_id"] == driver_id:
+            print(anketa[i]["Anket_id"])
+            return anketa[i]["Status"]
+
+
+def get_driver_company(chat_id):
+    with open("sign_in_users_driver.json", "r", encoding='utf-8') as json_file:
+        login = json.load(json_file)[str(chat_id)]
+
+    with open('data/Drivers.json', 'r', encoding='utf-8') as file:
+        driver = json.load(file)
+    for i in range(len(driver)):
+        if driver[i]["Login"] == login:
+            return driver[i]["Company"]

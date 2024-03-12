@@ -1,0 +1,38 @@
+[
+  {
+    "Anket_id": 1,
+    "Company": "1 2",
+    "Status": "Удтверждён",
+    "driver_id": 1
+  },
+  {
+    "Anket_id": 2,
+    "Company": "1 2",
+    "Status": "Отклонён",
+    "driver_id": 2
+  },
+  {
+    "Anket_id": 3,
+    "Company": "2",
+    "Status": "На рассмотрении",
+    "driver_id": 3
+  },
+  {
+    "Anket_id": 4,
+    "Company": "1",
+    "Status": "Удтверждён",
+    "driver_id": 4
+  },
+  {
+    "Anket_id": 5,
+    "Company": "1",
+    "Status": "На рассмотрении",
+    "driver_id": 5
+  },
+  {
+    "Anket_id": 6,
+    "Company": "1",
+    "Status": "Удтверждён",
+    "driver_id": 6
+  }
+]
