@@ -1,7 +1,7 @@
 # Тут я решил оставить все функции и переменную, которые не уникальны
 
 from telebot import TeleBot
-from telegram.ext import Updater, CommandHandler
+# from telegram.ext import Updater, CommandHandler
 import json
 
 TOKEN = '6971909537:AAGbRyjyE2WfLqLpBxZobDuLCo8iSjM21BY'

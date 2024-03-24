@@ -1,62 +1,22 @@
 [
   {
-    "Birthday": "25.05.2000",
-    "Full_name": "Владимир",
-    "Login": "1234",
-    "Password": "1",
-    "Route": true,
-    "Car": "О000ОО196",
-    "Company": "Колёса",
-    "ID": 1
-  },
-  {
-    "Birthday": "04.05.1996",
-    "Full_name": "Михайил",
-    "Login": "4321",
-    "Password": "2",
-    "Route": false,
-    "Car": "444444",
-    "Company": "Колёса",
-    "ID": 2
-  },
-  {
-    "Birthday": "19.12.1989",
-    "Full_name": "Олег",
-    "Login": "1111",
-    "Password": "7",
-    "Route": false,
-    "Car": "Т555ТТ196",
-    "Company": "Шины",
-    "ID": 3
-  },
-  {
-    "Birthday": "29.02.2001",
-    "Full_name": "Александр",
-    "Login": "0000",
-    "Password": "5",
-    "Route": false,
-    "Car": "333333",
-    "Company": "Шины",
-    "ID": 4
-  },
-  {
-    "Birthday": "22.11.2002",
-    "Full_name": "Данин Алексей А",
-    "ID": 5,
-    "Login": "qwerty",
-    "Password": "123",
+    "Birthday": "",
+    "Full_name": "",
+    "ID": 0,
+    "Login": "",
+    "Password": "",
     "Route": false,
     "Car": "",
     "Company": ""
   },
   {
-    "Birthday": "12.12.1212",
-    "Full_name": "Биба И Боба",
-    "ID": 6,
-    "Login": "ййййй",
-    "Password": "211212",
+    "Birthday": "qwer",
+    "Full_name": "qwer",
+    "ID": 1,
+    "Login": "qwrer",
+    "Password": "qwer",
     "Route": false,
     "Car": "",
-    "Company": "Колёса"
+    "Company": ""
   }
 ]

@@ -222,6 +222,24 @@ def get_driver_status(chat_id):
             return anketa[i]["Status"]
 
 
+def get_ankets_driver(chat_id):
+    with open("sign_in_users_driver.json", "r", encoding='utf-8') as json_file:
+        login = json.load(json_file)[str(chat_id)]
+
+    driver_id = 0
+    with open('data/Drivers.json', 'r', encoding='utf-8') as file:
+        driver = json.load(file)
+    for i in range(len(driver)):
+        if driver[i]["Login"] == login:
+            driver_id = driver[i]["ID"]
+    with open('data/Ankets.json', 'r', encoding='utf-8') as file:
+        anketa = json.load(file)
+    for i in range(len(anketa)):
+        if anketa[i]["driver_id"] == driver_id:
+            return True
+    return False
+
+
 def get_driver_company(chat_id):
     with open("sign_in_users_driver.json", "r", encoding='utf-8') as json_file:
         login = json.load(json_file)[str(chat_id)]

@@ -29,18 +29,26 @@ def main_message(message):
     else:
         # TODO: здесь нужно еще сделать разветвление для просто просмотра состояния заявления
         markup = types.InlineKeyboardMarkup()
-        markup.add(types.InlineKeyboardButton('Статус', callback_data='get_status'))
-        status = get_driver_status(chat_id)
-        print(status)
-        if status == "Удтверждён":
-            markup.add(types.InlineKeyboardButton('Добавить поломку', callback_data='add_defects'))
-            driver = get_driver_data(chat_id)
-            if not driver["Route"]:
-                markup.add(types.InlineKeyboardButton('Войти на маршрут', callback_data='route false'))
-            elif driver["Route"]:
-                markup.add(types.InlineKeyboardButton('Уйти с маршрута', callback_data='route true'))
-        send_message(chat_id, 'Выберите дальнейшее действие', reply_markup=markup)
-        deleter(chat_id, message.id)
+        anketa = get_ankets_driver(chat_id)
+        if not anketa:
+            markup.add(types.InlineKeyboardButton('Заполнить анкету на работу', callback_data='create_application'))
+            send_message(chat_id, 'Выберите дальнейшее действие', reply_markup=markup)
+            deleter(chat_id, message.id)
+        else:
+            markup.add(types.InlineKeyboardButton('Статус', callback_data='get_status'))
+            status = get_driver_status(chat_id)
+
+            print(status)
+
+            if status == "Удтверждён":
+                markup.add(types.InlineKeyboardButton('Добавить поломку', callback_data='add_defects'))
+                driver = get_driver_data(chat_id)
+                if not driver["Route"]:
+                    markup.add(types.InlineKeyboardButton('Войти на маршрут', callback_data='route false'))
+                elif driver["Route"]:
+                    markup.add(types.InlineKeyboardButton('Уйти с маршрута', callback_data='route true'))
+            send_message(chat_id, 'Выберите дальнейшее действие', reply_markup=markup)
+            deleter(chat_id, message.id)
 
 
 def registration_driver(message):
@@ -97,11 +105,10 @@ def add_company(message):
     # get_company(message)
     company = message.text
     app_dict = {"Anket_id": get_id("data/Ankets.json", "Anket_id"),
-                'Company': get_company_id(company), "Status": 'На рассмотрении', "driver_id": dict_driver["ID"]}
+                'Company': get_company_id(company), "Status": 'На рассмотрении', "driver_id": get_driver_data(chat_id)["ID"]}
     add_to_file("data/Ankets.json", app_dict)
     send_message(chat_id, "Заявление было успешно отправлено", parse_mode='html')
     deleter(chat_id, message.id)
-
 
 
 @bot.message_handler(commands=['sign_out'])
@@ -351,26 +358,6 @@ def get_passwd(message, login):
         deleter(chat_id, message.id)
         bot.register_next_step_handler(message, get_passwd, login=login)
 
-# def get_company(message):
-#     chat_id = message.chat.id
-#     company = message.text
-#
-#     # deleter(message)
-#     # add_message(message)  # Добавление сообщения, которое ввёл пользователь
-#
-#     if is_company(company):
-#         send_message(chat_id, "🔑 Компания есть <u>в системе.</u> \nВведите ваш <b>логин</b>.\n",
-#                      parse_mode='html')
-#         deleter(chat_id, message.id)
-#         bot.register_next_step_handler(message, get_login, company=company)
-#     elif company == '/start':  # for break from menu, do you think that we should add InlineKeyboardButton?
-#         start_message(message)
-#     else:
-#         send_message(chat_id,
-#                      "🚫 Компания не зарегистрирован в системе. Возможно введена неправильно\nПовторите попытку.\n",
-#                      parse_mode='html')
-#         deleter(chat_id, message.id)
-#         bot.register_next_step_handler(message, get_company)
 
 @bot.message_handler(func=lambda message: message)
 def deleter(chat_id, message_id, num=10):
