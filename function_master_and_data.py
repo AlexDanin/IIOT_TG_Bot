@@ -129,27 +129,38 @@ def save_car_reg_log(chat_id):
 
     car_reg_logs["master"] = get_sign_in_user(chat_id)
 
-    gosnum = car_reg_logs.pop('gosnum')
+    # gosnum = car_reg_logs['gosnum']
 
-    if gosnum not in dict(cars).keys():
-        cars[gosnum] = car_reg_logs
+    # if gosnum not in dict(cars).keys():
+    #     cars[gosnum] = car_reg_logs
+    # else:
+    #     cars[gosnum] = cars[gosnum] | car_reg_logs
+    if len(cars) != 0:
+        if cars[-1]['gosnum'] != car_reg_logs['gosnum']:
+            id = len(cars)
+            car_reg_logs["id"] = id + 1
+            cars.append(car_reg_logs)
+
+            with open('data/Cars.json', 'w', encoding='utf-8') as file:
+                json.dump(cars, file, ensure_ascii=False)
     else:
-        cars[gosnum] = cars[gosnum] | car_reg_logs
+        id = len(cars)
+        car_reg_logs["id"] = id + 1
+        cars.append(car_reg_logs)
 
-    with open('data/Cars.json', 'w', encoding='utf-8') as file:
-        json.dump(cars, file, ensure_ascii=False)
+        with open('data/Cars.json', 'w', encoding='utf-8') as file:
+            json.dump(cars, file, ensure_ascii=False)
 
-    del_car_reg_log(chat_id)
+    # del_car_reg_log(chat_id)
 
 
 def form_text(chat_id, kwags):
     main_text = f"⚙️ <b>Добавление <u>устройств</u> в базу данных</b> \n"
-    device_text = f"🆔<b>Укажите</b> <u>ID</u> устройства\n"
-    name_text = f"🏢<b>Введите</b> <u>наименование компании</u>\n"
-    gosnum_text = f"🚘<b>Введите</b> государственный <u>номер автомобиля</u>\n"
+    device_text = f"🆔 <b>Укажите</b> <u>ID</u> устройства\n"
+    name_text = f"🏢 <b>Введите</b> <u>наименование компании</u>\n"
+    gosnum_text = f"🚘 <b>Введите</b> государственный <u>номер автомобиля</u>\n"
     brand_text = f"🚗 <b>Укажите</b> <u>марку автомобиля</u>\n"
-    wheels_text = f"🛞 <b>Введите</b> количество <u>колёс</u> автомобиля\n"
-    brandWs_text = f"🔄 <b>Укажите</b> <u>марку шин</u>\n"
+    wheels_text = f"🛞 <b>Введите</b> количество <u>осей</u> автомобиля\n"
 
     chat_id = str(chat_id)
     kwags = get_car_reg_log(chat_id)
@@ -169,12 +180,151 @@ def form_text(chat_id, kwags):
                 case 'brand':
                     brand_text = f"🚗 <b>{kwags['brand']}</b> <u>марку автомобиля</u>\n"
                 case 'wheels':
-                    wheels_text = f"🛞 <b>{kwags['wheels']}</b> количество <u>колёс</u> автомобиля\n"
-                case 'brandWs':
-                    brandWs_text = f"🔄 <b>{kwags['brandWs']}</b> <u>марку шин</u>\n"
+                    wheels_text = f"🛞 <b>{kwags['wheels']}</b> количество <u>осей</u> автомобиля\n"
 
-    return main_text + device_text + name_text + gosnum_text + brand_text + wheels_text + brandWs_text
+    return main_text + device_text + name_text + gosnum_text + brand_text + wheels_text
 
+
+def add_new_wheels(num_of_axes):
+    with open('data/Wheels.json', 'r', encoding='utf-8') as file:
+        wheels = json.load(file)
+
+    wheel = {
+        "id": len(wheels) + 1,
+        "id_car": get_cars_reg()[-1]['id'],
+        "count": num_of_axes,
+        "brand_wheel": ""
+    }
+
+    if len(wheels) != 0:
+        if wheels[-1]['id_car'] != wheel['id_car']:
+            wheels.append(wheel)
+
+            with open('data/Wheels.json', 'w', encoding='utf-8') as file:
+                json.dump(wheels, file, ensure_ascii=False)
+    else:
+        wheels.append(wheel)
+
+        with open('data/Wheels.json', 'w', encoding='utf-8') as file:
+            json.dump(wheels, file, ensure_ascii=False)
+
+
+def wheel_text_form(wheel_id):
+    with open('data/Wheels.json', 'r', encoding='utf-8') as file:
+        wheels = json.load(file)
+
+    main_text = f"Конфигурация колеса\n"
+    id_sensor_text = f"Номер датчика:  <b>{wheels[-1][wheel_id]['sensor_num']}</b>\n"
+    min_t_text = f"Мин. температура:  <b>{wheels[-1][wheel_id]['min_t']}</b>\n"
+    max_t_text = f"Макс. температура:  <b>{wheels[-1][wheel_id]['max_t']}</b>\n"
+    standard_t_text = f"Эталонная температура:  <b>{wheels[-1][wheel_id]['standard_t']}</b>\n"
+    min_p_text = f"Мин. давление:  <b>{wheels[-1][wheel_id]['min_p']}</b>\n"
+    max_p_text = f"Макс. давление:  <b>{wheels[-1][wheel_id]['max_p']}</b>\n"
+    standard_p_text = f"Эталонное давление:  <b>{wheels[-1][wheel_id]['standard_p']}</b>\n"
+
+    # chat_id = str(chat_id)
+    # kwags = get_car_reg_log(chat_id)
+    #
+    # if chat_id in kwags:
+    #
+    #     kwags = get_car_reg_log(chat_id)[chat_id]
+    #
+    #     for key in get_car_reg_log(chat_id)[chat_id].keys():
+    #         match key:
+    #             case 'device':
+    #                 device_text = f"🆔 <b>{kwags['device']}</b> <u>ID</u> устройства\n"
+    #             case 'name':
+    #                 name_text = f"🏢 <b>{kwags['name']}</b> <u>наименование компании</u>\n"
+    #             case 'gosnum':
+    #                 gosnum_text = f"🚘 <b>{kwags['gosnum']}</b> государственный <u>номер автомобиля</u>\n"
+    #             case 'brand':
+    #                 brand_text = f"🚗 <b>{kwags['brand']}</b> <u>марку автомобиля</u>\n"
+    #             case 'wheels':
+    #                 wheels_text = f"🛞 <b>{kwags['wheels']}</b> количество <u>осей</u> автомобиля\n"
+
+    return main_text + id_sensor_text + min_t_text + max_t_text + standard_t_text + min_p_text + max_p_text + standard_p_text
+
+
+def is_sensor_is(sensor_id):
+    with open('data/Wheels.json', 'r', encoding='utf-8') as file:
+        wheels = json.load(file)
+
+    return wheels[-1].get(sensor_id)
+
+
+def add_sensor_to_wheels(num_wheels):
+    with open('data/Wheels.json', 'r', encoding='utf-8') as file:
+        wheels = json.load(file)
+
+    sensor = {
+        "sensor_num": None,
+        "min_t": None,
+        "max_t": None,
+        "standard_t": None,
+        "min_p": None,
+        "max_p": None,
+        "standard_p": None
+    }
+
+    wheels[-1][num_wheels] = sensor
+
+    with open('data/Wheels.json', 'w', encoding='utf-8') as file:
+        json.dump(wheels, file, ensure_ascii=False)
+
+
+def del_sensor_from_wheels(num_wheels):
+    with open('data/Wheels.json', 'r', encoding='utf-8') as file:
+        wheels = json.load(file)
+
+    del wheels[-1][num_wheels]
+
+    with open('data/Wheels.json', 'w', encoding='utf-8') as file:
+        json.dump(wheels, file, ensure_ascii=False)
+
+
+def get_created_sensors_list():
+    lst = [' '] * 4 * int(get_cars_reg()[-1]['wheels'])
+
+    with open('data/Wheels.json', 'r', encoding='utf-8') as file:
+        wheels = json.load(file)
+
+    if len(wheels) != 0 and len(wheels) == len(get_cars_reg()):
+        for i in wheels[-1].keys():
+            if 'wheel_' in i:
+                lst[int(i.replace('wheel_', '')) - 1] = '✅'
+
+    return lst
+
+
+def add_data_to_wheel(wheel_id, param, data):
+    with open('data/Wheels.json', 'r', encoding='utf-8') as file:
+        wheels = json.load(file)
+
+    wheels[-1][wheel_id][param] = data
+
+    with open('data/Wheels.json', 'w', encoding='utf-8') as file:
+        json.dump(wheels, file, ensure_ascii=False)
+
+
+def is_wheel_ok(wheel_id):
+    with open('data/Wheels.json', 'r', encoding='utf-8') as file:
+        wheels = json.load(file)
+
+    for i in wheels[-1][wheel_id]:
+        if wheels[-1][wheel_id][i] == None:
+            return False
+    return True
+
+
+def is_someone_wheel():
+    with open('data/Wheels.json', 'r', encoding='utf-8') as file:
+        wheels = json.load(file)
+
+    if len(wheels) != 0:
+        for i in wheels[-1].keys():
+            if 'wheel_' in i:
+                return wheels[-1][i]
+    # return False
 
 # this is "tomuch"
 def deleter_message(chat_id, message_id, count_del=1):

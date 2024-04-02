@@ -1,1 +1,29 @@
-{"Х826СК196": {"device": "5678", "name": "ШиныМашины", "brand": "МАН Грузовой1", "wheels": "6", "brandWs": "NOKIAN 55X65X90", "master": "master123"}}
+[
+  {
+    "device": "1",
+    "name": "ШиныМашины",
+    "gosnum": "А121АА196",
+    "brand": "Ламба",
+    "wheels": "3",
+    "master": "master123",
+    "id": 1
+  },
+  {
+    "device": "2",
+    "name": "ШиныМашины",
+    "gosnum": "А911АА196",
+    "brand": "Тоёта",
+    "wheels": "6",
+    "master": "master123",
+    "id": 2
+  },
+  {
+    "device": "4343434",
+    "name": "ООО \"Дальшина\"",
+    "gosnum": "Ч373АО196",
+    "brand": "МАН",
+    "wheels": "3",
+    "master": "master123",
+    "id": 4
+  }
+]

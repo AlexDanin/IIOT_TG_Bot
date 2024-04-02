@@ -205,9 +205,9 @@ def get_cars_reg():
 
 def get_car_wheels(id):
     with open('data/Cars.json', 'r', encoding="utf-8") as file:
-        return json.load(file)[id]["wheels"]
+        return json.load(file)[int(id)]["wheels"]
 
 
 def get_car_brand_wheel(id):
     with open('data/Cars.json', 'r', encoding="utf-8") as file:
-        return json.load(file)[id]["brandWs"]
+        return json.load(file)[int(id)]["brandWs"]

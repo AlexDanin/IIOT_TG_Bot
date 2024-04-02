@@ -199,12 +199,14 @@ def proof_applications(message, anket_id):
 def get_statistic(message, time, car_id):
     chat_id = message.chat.id
 
+    cars = get_cars_reg()
+
     if time == "week":
-        send_message(chat_id, f"Статистика по машине с гос номером - {car_id} за <b>неделю</b>", parse_mode='html')
+        send_message(chat_id, f"Статистика по машине с гос номером - {cars[int(car_id)]['gosnum']} за <b>неделю</b>", parse_mode='html')
     elif time == "month":
-        send_message(chat_id, f"Статистика по машине с гос номером - {car_id} за <b>месяц</b>", parse_mode='html')
+        send_message(chat_id, f"Статистика по машине с гос номером - {cars[int(car_id)]['gosnum']} за <b>месяц</b>", parse_mode='html')
     elif time == "all_time":
-        send_message(chat_id, f"Статистика по машине с гос номером - {car_id} за <b>всё время</b>", parse_mode='html')
+        send_message(chat_id, f"Статистика по машине с гос номером - {cars[int(car_id)]['gosnum']} за <b>всё время</b>", parse_mode='html')
 
     send_message(chat_id, f"Дата события: 22.10.2022\n"
                           f"Событие: Прокол колеса\n"
@@ -238,7 +240,7 @@ def get_route(message):
 
     deleter(chat_id, message.id)
     for i in drivers:
-        if (i["Route"]):
+        if i["Route"]:
             send_message(chat_id, f'Машина - {i["Car"]} на маршруте', parse_mode='html')
     markup = types.InlineKeyboardMarkup()
     markup.add(types.InlineKeyboardButton("Назад", callback_data=f'main_menu'))
@@ -270,14 +272,15 @@ def get_cars(message):
     send_message(chat_id, "🚗 Авто в вашем автопарке", parse_mode='html')
     deleter(chat_id, message.id)
     for value in cars:
-        if str(cars[value]["name"]) == str(company):
-            send_message(chat_id, f"Гос.Номер - {value}  |  Марка авто - {cars[value]['brand']}")
+        if str(value["name"]) == str(company):
+            send_message(chat_id, f"Гос.Номер - {value['gosnum']}  |  Марка авто - {value['brand']}")
     markup = types.InlineKeyboardMarkup()
     markup.add(types.InlineKeyboardButton("Назад", callback_data=f'main_menu'))
     send_message(chat_id, "Вернуться в меню", reply_markup=markup)
 
 
 def get_data_car(message):
+    print("1")
     chat_id = message.chat.id
     # deleter(message)
 
@@ -285,10 +288,17 @@ def get_data_car(message):
     company = get_name_company(chat_id)
 
     markup = types.InlineKeyboardMarkup()
+    print("2")
+    i = 0
     for value in cars:
-        if str(cars[value]["name"]) == str(company):
-            markup.add(types.InlineKeyboardButton(value, callback_data=f'car {value}'))
-    send_message(chat_id, "🚗 Выбирите авто, которое хотите посмотреть", parse_mode='html', reply_markup=markup)
+        print("3")
+        if str(value["name"]) == str(company):
+            print(str(value['gosnum']))
+            markup.add(types.InlineKeyboardButton(str(value['gosnum']), callback_data=f'car {i}'))
+        i += 1
+    print(markup.to_json())
+    send_message(chat_id, "🚗 Выбирите авто, которое хотите посмотреть", reply_markup=markup)
+    print("6")
     deleter(chat_id, message.id)
 
 
@@ -297,9 +307,10 @@ def get_current_state_data(message, value):
     # deleter(message)
 
     num = int(get_car_wheels(value))
+    cars = get_cars_reg()
     markup = types.InlineKeyboardMarkup()
 
-    for i in range(1, 6, 2):
+    for i in range(1, int(cars[int(value)]['wheels']), 2):
         data = get_state(i)
         print(data)
         b1 = types.InlineKeyboardButton(f"№ {i} | {str(data[0])}°С | {str(data[1])} Бар", callback_data=f'wheel {i} {value}')
@@ -309,7 +320,7 @@ def get_current_state_data(message, value):
         # b2 = types.InlineKeyboardButton(f"№ {i + 1} | T = 26°С | P = 6 Бар", callback_data=f'wheel {i + 1} {value}')
         markup.row(b1, b2)
 
-    send_message(chat_id, f"🚗 Данные по машине с номером - {value}", parse_mode='html', reply_markup=markup)
+    send_message(chat_id, f"🚗 Данные по машине с номером - {cars[int(value)]['gosnum']}", parse_mode='html', reply_markup=markup)
     markup1 = types.InlineKeyboardMarkup()
     b1 = types.InlineKeyboardButton(f"неделю", callback_data=f'statistic week {value}')
     b2 = types.InlineKeyboardButton(f"месяц", callback_data=f'statistic month {value}')
