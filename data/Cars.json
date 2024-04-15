@@ -2,28 +2,64 @@
   {
     "device": "1",
     "name": "ШиныМашины",
-    "gosnum": "А121АА196",
+    "gosnum": "A121AA196",
     "brand": "Ламба",
-    "wheels": "3",
+    "wheels": "6",
     "master": "master123",
     "id": 1
   },
   {
     "device": "2",
     "name": "ШиныМашины",
-    "gosnum": "А911АА196",
-    "brand": "Тоёта",
-    "wheels": "6",
+    "gosnum": "A222AA196",
+    "brand": "Гелик",
+    "wheels": "3",
     "master": "master123",
     "id": 2
   },
   {
-    "device": "4343434",
-    "name": "ООО \"Дальшина\"",
-    "gosnum": "Ч373АО196",
-    "brand": "МАН",
-    "wheels": "3",
+    "device": "3",
+    "name": "ШиныМашины",
+    "gosnum": "A333AA196",
+    "brand": "Ламба",
+    "wheels": "2",
+    "master": "master123",
+    "id": 3
+  },
+  {
+    "device": "4",
+    "name": "ШиныМашины",
+    "gosnum": "A444AA196",
+    "brand": "бугати",
+    "wheels": "2",
     "master": "master123",
     "id": 4
+  },
+  {
+    "device": "5",
+    "name": "ШиныМашины",
+    "gosnum": "A555AA196",
+    "brand": "Ламба",
+    "wheels": "3",
+    "master": "master123",
+    "id": 5
+  },
+  {
+    "device": "6",
+    "name": "ШиныМашины",
+    "gosnum": "A666AA196",
+    "brand": "йцукен",
+    "wheels": "3",
+    "master": "master123",
+    "id": 6
+  },
+  {
+    "device": "7",
+    "name": "ШиныМашины",
+    "gosnum": "A777AA196",
+    "brand": "сиськи",
+    "wheels": "4",
+    "master": "master123",
+    "id": 7
   }
 ]
