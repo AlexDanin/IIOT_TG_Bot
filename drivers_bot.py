@@ -47,6 +47,8 @@ def main_message(message):
                     markup.add(types.InlineKeyboardButton('Войти на маршрут', callback_data='route false'))
                 elif driver["Route"]:
                     markup.add(types.InlineKeyboardButton('Уйти с маршрута', callback_data='route true'))
+            if status == "Отклонён":
+                markup.add(types.InlineKeyboardButton('Отправить анкету в компанию', callback_data='push_anketa'))
             send_message(chat_id, 'Выберите дальнейшее действие', reply_markup=markup)
             deleter(chat_id, message.id)
 
@@ -91,9 +93,25 @@ def end_of_registration(message):
     add_user_log(chat_id, dict_driver['Login'])
 
 
+def push_anketa(message):
+    chat_id = message.chat.id
+    send_message(chat_id, "Введите через запятую компании, в которые вы хотите отправить заявления", parse_mode='html')
+    send_message(chat_id, f"Список всех компаний:"
+                          f"\n {all_companies()}", parse_mode='html')
+    bot.register_next_step_handler(message, change_status)
+
+
+def change_status(message):
+    chat_id = message.chat.id
+
+    company = message.text
+    change_status_anketa(chat_id, company)
+    send_message(chat_id, "Заявление было успешно отправлено", parse_mode='html')
+    deleter(chat_id, message.id)
+
+
 def create_application(message):
     chat_id = message.chat.id
-    all_companies()
     send_message(chat_id, "Введите через запятую компании, в которые вы хотите отправить заявления", parse_mode='html')
     send_message(chat_id, f"Список всех компаний:"
                           f"\n {all_companies()}", parse_mode='html')
@@ -164,6 +182,8 @@ def callback_message(callback):
                 bot.register_next_step_handler(message, add_description_defects)
             case 'get_status':
                 get_status(message)
+            case 'push_anketa':
+                push_anketa(message)
 
 
 def get_status(message):

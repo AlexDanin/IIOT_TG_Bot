@@ -1,14 +1,1 @@
-[
-  {
-    "Anket_id": 0,
-    "Company": "",
-    "Status": "",
-    "driver_id": 0
-  },
-  {
-    "Anket_id": 1,
-    "Company": "1",
-    "Status": "На рассмотрении",
-    "driver_id": 1
-  }
-]
+[{"Anket_id": 1, "Company": "1", "Status": "Удтверждён", "driver_id": 1}, {"Anket_id": 2, "Company": "1", "Status": "Удтверждён", "driver_id": 2}]

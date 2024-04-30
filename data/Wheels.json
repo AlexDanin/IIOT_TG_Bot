@@ -544,5 +544,107 @@
       "max_p": 3.0,
       "standard_p": 2.0
     }
+  },
+  {
+    "id": 8,
+    "id_car": 8,
+    "count": 3,
+    "brand_wheel": "",
+    "wheel_2": {
+      "sensor_num": 1,
+      "min_t": 36.0,
+      "max_t": 90.0,
+      "standard_t": 62.0,
+      "min_p": 8.5,
+      "max_p": 9.5,
+      "standard_p": 9.0
+    },
+    "wheel_3": {
+      "sensor_num": 2,
+      "min_t": 36.0,
+      "max_t": 92.0,
+      "standard_t": 62.0,
+      "min_p": 8.5,
+      "max_p": 9.5,
+      "standard_p": 9.0
+    },
+    "wheel_5": {
+      "sensor_num": 3,
+      "min_t": 36.0,
+      "max_t": 90.0,
+      "standard_t": 62.0,
+      "min_p": 8.5,
+      "max_p": 9.5,
+      "standard_p": 9.0
+    },
+    "wheel_6": {
+      "sensor_num": 4,
+      "min_t": 36.0,
+      "max_t": 90.0,
+      "standard_t": 62.0,
+      "min_p": 8.5,
+      "max_p": 9.5,
+      "standard_p": 9.0
+    },
+    "wheel_7": {
+      "sensor_num": 5,
+      "min_t": 36.0,
+      "max_t": 90.0,
+      "standard_t": 62.0,
+      "min_p": 8.5,
+      "max_p": 9.5,
+      "standard_p": 9.0
+    },
+    "wheel_8": {
+      "sensor_num": 6,
+      "min_t": 36.0,
+      "max_t": 90.0,
+      "standard_t": 62.0,
+      "min_p": 8.5,
+      "max_p": 9.5,
+      "standard_p": 9.0
+    },
+    "wheel_9": {
+      "sensor_num": 7,
+      "min_t": 36.0,
+      "max_t": 90.0,
+      "standard_t": 62.0,
+      "min_p": 8.5,
+      "max_p": 9.5,
+      "standard_p": 9.0
+    },
+    "wheel_10": {
+      "sensor_num": 8,
+      "min_t": 36.0,
+      "max_t": 90.0,
+      "standard_t": 62.0,
+      "min_p": 8.5,
+      "max_p": 9.5,
+      "standard_p": 9.0
+    },
+    "wheel_11": {
+      "sensor_num": 9,
+      "min_t": 36.0,
+      "max_t": 90.0,
+      "standard_t": 62.0,
+      "min_p": 8.5,
+      "max_p": 9.5,
+      "standard_p": 9.0
+    },
+    "wheel_12": {
+      "sensor_num": 10,
+      "min_t": 36.0,
+      "max_t": 90.0,
+      "standard_t": 62.0,
+      "min_p": 8.5,
+      "max_p": 9.5,
+      "standard_p": 9.0
+    }
+  },
+  {
+    "id": 9,
+    "id_car": 9,
+    "count": 12,
+    "brand_wheel": ""
   }
 ]

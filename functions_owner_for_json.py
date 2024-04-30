@@ -211,3 +211,12 @@ def get_car_wheels(id):
 def get_car_brand_wheel(id):
     with open('data/Cars.json', 'r', encoding="utf-8") as file:
         return json.load(file)[int(id)]["brandWs"]
+
+
+def get_wheels_data(car_id):
+    with open('data/Wheels.json', 'r', encoding="utf-8") as file:
+        data = json.load(file)
+
+    for i in range(len(data)):
+        if data[i]["id_car"] == car_id:
+            return data[i]

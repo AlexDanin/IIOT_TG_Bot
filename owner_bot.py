@@ -256,7 +256,7 @@ def get_drivers(message):
     deleter(chat_id, message.id)
     for i in drivers:
         send_message(chat_id,
-                     f'ФИО Водителя - {i["Full name"]} | Гос. Номер - {i["Car"]} | Логин - {i["Login"]} | Пароль - {i["Password"]}',
+                     f'ФИО Водителя - {i["Full_name"]} | Гос. Номер - {i["Car"]} | Логин - {i["Login"]} | Пароль - {i["Password"]}',
                      parse_mode='html')
     markup = types.InlineKeyboardMarkup()
     markup.add(types.InlineKeyboardButton("Назад", callback_data=f'main_menu'))
@@ -280,25 +280,18 @@ def get_cars(message):
 
 
 def get_data_car(message):
-    print("1")
     chat_id = message.chat.id
-    # deleter(message)
 
     cars = get_cars_reg()
     company = get_name_company(chat_id)
 
     markup = types.InlineKeyboardMarkup()
-    print("2")
     i = 0
     for value in cars:
-        print("3")
         if str(value["name"]) == str(company):
-            print(str(value['gosnum']))
             markup.add(types.InlineKeyboardButton(str(value['gosnum']), callback_data=f'car {i}'))
         i += 1
-    print(markup.to_json())
     send_message(chat_id, "🚗 Выбирите авто, которое хотите посмотреть", reply_markup=markup)
-    print("6")
     deleter(chat_id, message.id)
 
 
@@ -306,19 +299,32 @@ def get_current_state_data(message, value):
     chat_id = message.chat.id
     # deleter(message)
 
-    num = int(get_car_wheels(value))
     cars = get_cars_reg()
     markup = types.InlineKeyboardMarkup()
 
-    for i in range(1, int(cars[int(value)]['wheels']), 2):
-        data = get_state(i)
-        print(data)
-        b1 = types.InlineKeyboardButton(f"№ {i} | {str(data[0])}°С | {str(data[1])} Бар", callback_data=f'wheel {i} {value}')
-        data2 = get_state(i + 1)
-        b2 = types.InlineKeyboardButton(f"№ {i + 1} | {str(data2[0])}°С | {str(data2[1])} Бар", callback_data=f'wheel {i + 1} {value}')
-        # b1 = types.InlineKeyboardButton(f"№ {i} | T = 26°С | P = 6 Бар", callback_data=f'wheel {i} {value}')
-        # b2 = types.InlineKeyboardButton(f"№ {i + 1} | T = 26°С | P = 6 Бар", callback_data=f'wheel {i + 1} {value}')
-        markup.row(b1, b2)
+    wheel = get_wheels_data(int(value) + 1)
+    print(wheel)
+
+    j = 1
+    for i in range(1, int(cars[int(value)]['wheels']) + 1):
+        lst_w = []
+        for _ in range(1, 5):
+            print(f"wheel_{j}")
+            if f"wheel_{j}" in wheel.keys():
+                lst_w.append(types.InlineKeyboardButton(f"{randint(10, 90)}°С | {randint(3, 9)} Бар", callback_data='Noneee'))
+            else:
+                lst_w.append(types.InlineKeyboardButton(" ", parse_mode='html', callback_data='Noneee'))
+            j += 1
+        markup.row(*lst_w)
+
+        # # data = get_state(i)
+        # # print(data)
+        # b1 = types.InlineKeyboardButton(f"№ {i} | {20}°С | {9} Бар", callback_data=f'wheel {i} {value}')
+        # data2 = get_state(i + 1)
+        # b2 = types.InlineKeyboardButton(f"№ {i + 1} | {26}°С | {9} Бар", callback_data=f'wheel {i + 1} {value}')
+        # b3 = types.InlineKeyboardButton(f"№ {i} | T = 26°С | P = 6 Бар", callback_data=f'wheel {i} {value}')
+        # b4 = types.InlineKeyboardButton(f"№ {i + 1} | T = 26°С | P = 6 Бар", callback_data=f'wheel {i + 1} {value}')
+        # markup.row(b1, b2)
 
     send_message(chat_id, f"🚗 Данные по машине с номером - {cars[int(value)]['gosnum']}", parse_mode='html', reply_markup=markup)
     markup1 = types.InlineKeyboardMarkup()

@@ -137,6 +137,18 @@ def deleter_message(chat_id, message_id, count_del=1):
             continue
 
 
+def change_status_anketa(chat_id, company):
+    with open("data/Ankets.json", "r", encoding='utf-8') as json_file:
+        data = json.load(json_file)
+    for i in range(len(data)):
+        if data[i]["driver_id"] == get_driver_data(chat_id)["ID"]:
+            data[i]["Status"] = "На рассмотрении"
+            data[i]["Company"] = get_company_id(company)
+            break
+    with open("data/Ankets.json", "w", encoding='utf-8') as json_file:
+        json.dump(data, json_file, ensure_ascii=False)
+
+
 def add_to_file(file, dict_):
     with open(file, "r", encoding='utf-8') as json_file:
         data = json.load(json_file)
@@ -163,6 +175,8 @@ def get_car(chat_id):
 def get_id(file_, name):
     with open(file_, "r", encoding='utf-8') as json_file:
         file = json.load(json_file)
+        if len(file) == 0:
+            return 1
         return file[len(file) - 1][name] + 1
 
 

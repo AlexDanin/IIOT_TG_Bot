@@ -57,9 +57,27 @@
     "device": "7",
     "name": "ШиныМашины",
     "gosnum": "A777AA196",
-    "brand": "сиськи",
+    "brand": "потом_придумаю",
     "wheels": "4",
     "master": "master123",
     "id": 7
+  },
+  {
+    "device": "10",
+    "name": "ШиныМашины",
+    "gosnum": "А111АВ196",
+    "brand": "FAW",
+    "wheels": "3",
+    "master": "master123",
+    "id": 8
+  },
+  {
+    "device": "12345",
+    "name": "ШинаМашина",
+    "gosnum": "Х027АБ27",
+    "brand": "Шакман",
+    "wheels": "12",
+    "master": "master123",
+    "id": 9
   }
 ]
