@@ -299,12 +299,27 @@ def name_property(message):
     car_registration(message, name=text)
 
 
+def transliterate(string):
+    # Словарь для замены русских букв на английские
+    translit_table = {
+        'А': 'A', 'В': 'B', 'Е': 'E', 'К': 'K', 'М': 'M',
+        'Н': 'H', 'О': 'O', 'Р': 'P', 'С': 'C', 'Т': 'T',
+        'У': 'Y', 'Х': 'X'
+    }
+
+    # Проходимся по каждому символу строки и заменяем его, если это русская буква
+    translated_string = ''.join(translit_table.get(c, c) for c in string)
+
+    return translated_string
+
+
 def gosnum_property(message):
     chat_id = message.chat.id
 
     add_message(message)  # Добавление сообщения, которое ввёл пользователь
 
-    text = message.text
+    text = transliterate(message.text)
+
     send_message(chat_id, f'Государственный номер {text} добавлен')
     car_registration(message, gosnum=text)
 

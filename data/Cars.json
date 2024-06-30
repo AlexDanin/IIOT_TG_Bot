@@ -39,7 +39,7 @@
     "device": "5",
     "name": "ШиныМашины",
     "gosnum": "A555AA196",
-    "brand": "Ламба",
+    "brand": "Камаз",
     "wheels": "3",
     "master": "master123",
     "id": 5
@@ -65,7 +65,7 @@
   {
     "device": "10",
     "name": "ШиныМашины",
-    "gosnum": "А111АВ196",
+    "gosnum": "A111AB196",
     "brand": "FAW",
     "wheels": "3",
     "master": "master123",
@@ -74,10 +74,19 @@
   {
     "device": "12345",
     "name": "ШинаМашина",
-    "gosnum": "Х027АБ27",
+    "gosnum": "X027AB127",
     "brand": "Шакман",
     "wheels": "12",
     "master": "master123",
     "id": 9
+  },
+  {
+    "device": "9",
+    "name": "ШиныМашины",
+    "gosnum": "A952AA196",
+    "wheels": "4",
+    "brand": "Маккларен",
+    "master": "master123",
+    "id": 10
   }
 ]

@@ -646,5 +646,20 @@
     "id_car": 9,
     "count": 12,
     "brand_wheel": ""
+  },
+  {
+    "id": 10,
+    "id_car": 10,
+    "count": 4,
+    "brand_wheel": "",
+    "wheel_2": {
+      "sensor_num": 1,
+      "min_t": 20.0,
+      "max_t": 30.0,
+      "standard_t": 25.0,
+      "min_p": 5.0,
+      "max_p": 12.0,
+      "standard_p": 9.5
+    }
   }
 ]
