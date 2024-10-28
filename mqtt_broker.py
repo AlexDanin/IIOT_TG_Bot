@@ -1,7 +1,7 @@
 from function_mqtt import *
 
 client.on_message = on_message
-client.connect("95.213.151.166", 1883, 60)
+client.connect("5.188.138.91", 1883, 60)
 subscribe_device("1")
 subscribe_device("2")
 subscribe_device("3")
