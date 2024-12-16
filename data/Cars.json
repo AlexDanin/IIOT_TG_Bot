@@ -34,5 +34,23 @@
     "wheels": "4",
     "master": "master123",
     "id": 4
+  },
+  {
+    "name": "ООО «Дальшина»",
+    "gosnum": "Y624OX127",
+    "wheels": "2",
+    "brand": "Isuzu",
+    "device": "9",
+    "master": "master123",
+    "id": 5
+  },
+  {
+    "device": "90",
+    "name": "ШиныМашины",
+    "gosnum": "O999OO196",
+    "brand": "Ламбада",
+    "wheels": "4",
+    "master": "master123",
+    "id": 6
   }
 ]

@@ -312,7 +312,7 @@ def get_current_state_data(message, value):
         lst_w = []
         for _ in range(1, 5):
             print(f"wheel_{j}")
-            if f"wheel_{j}" in wheel.keys():
+            if f"wheel_{j}" in wheel.keys() and sensors != {}:
                 lst_w.append(types.InlineKeyboardButton(f"{sensors[f'sens_{x}']['temp'][-1]}°С | {sensors[f'sens_{x}']['pres'][-1]} Бар", callback_data='Noneee'))
             else:
                 lst_w.append(types.InlineKeyboardButton(" ", parse_mode='html', callback_data='Noneee'))

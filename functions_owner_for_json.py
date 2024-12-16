@@ -223,9 +223,21 @@ def get_wheels_data(car_id):
 
 
 def get_sensors_data(car_id):
+    with open('data/Cars.json', 'r', encoding="utf-8") as file:
+        car = json.load(file)
+
+    device_id = 0
+
+    for i in car:
+        if i["id"] == car_id:
+            device_id = i["device"]
+            break
+
     with open('data/Sensors_Data.json', 'r', encoding="utf-8") as file:
         data = json.load(file)
 
     for i in data:
-        if int(i) == car_id:
+        if int(i) == device_id:
             return data[i]
+
+    return {}

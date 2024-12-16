@@ -102,193 +102,85 @@
     }
   },
   {
-    "id": 3,
-    "id_car": 3,
-    "count": 3,
+    "id": 5,
+    "id_car": 5,
+    "count": 2,
     "brand_wheel": "",
-    "wheel_2": {
-      "sensor_num": 1,
-      "min_t": 20.0,
-      "max_t": 30.0,
-      "standard_t": 25.0,
-      "min_p": -1.0,
-      "max_p": 3.0,
-      "standard_p": 2.0
-    },
     "wheel_3": {
+      "sensor_num": 1,
+      "min_t": 40.0,
+      "max_t": 80.0,
+      "standard_t": 65.0,
+      "min_p": 4.5,
+      "max_p": 7.5,
+      "standard_p": 6.0
+    },
+    "wheel_2": {
       "sensor_num": 2,
-      "min_t": 20.0,
-      "max_t": 30.0,
-      "standard_t": 25.0,
-      "min_p": -1.0,
-      "max_p": 3.0,
-      "standard_p": 2.0
+      "min_t": 40.0,
+      "max_t": 80.0,
+      "standard_t": 65.0,
+      "min_p": 4.5,
+      "max_p": 7.5,
+      "standard_p": 6.0
+    },
+    "wheel_5": {
+      "sensor_num": 3,
+      "min_t": 40.0,
+      "max_t": 80.0,
+      "standard_t": 65.0,
+      "min_p": 4.5,
+      "max_p": 7.5,
+      "standard_p": 6.0
     },
     "wheel_6": {
-      "sensor_num": 3,
-      "min_t": 20.0,
-      "max_t": 30.0,
-      "standard_t": 25.0,
-      "min_p": -1.0,
-      "max_p": 3.0,
-      "standard_p": 2.0
+      "sensor_num": 4,
+      "min_t": 40.0,
+      "max_t": 80.0,
+      "standard_t": 65.0,
+      "min_p": 4.5,
+      "max_p": 7.5,
+      "standard_p": 6.0
     },
     "wheel_7": {
-      "sensor_num": 4,
-      "min_t": 20.0,
-      "max_t": 30.0,
-      "standard_t": 25.0,
-      "min_p": -1.0,
-      "max_p": 3.0,
-      "standard_p": 2.0
-    },
-    "wheel_9": {
       "sensor_num": 5,
-      "min_t": 20.0,
-      "max_t": 30.0,
-      "standard_t": 25.0,
-      "min_p": -1.0,
-      "max_p": 3.0,
-      "standard_p": 2.0
+      "min_t": 40.0,
+      "max_t": 80.0,
+      "standard_t": 65.0,
+      "min_p": 4.5,
+      "max_p": 7.5,
+      "standard_p": 6.0
     },
-    "wheel_10": {
+    "wheel_8": {
       "sensor_num": 6,
-      "min_t": 20.0,
-      "max_t": 30.0,
-      "standard_t": 25.0,
-      "min_p": -1.0,
-      "max_p": 3.0,
-      "standard_p": 2.0
-    },
-    "wheel_11": {
-      "sensor_num": 7,
-      "min_t": 20.0,
-      "max_t": 30.0,
-      "standard_t": 25.0,
-      "min_p": -1.0,
-      "max_p": 3.0,
-      "standard_p": 2.0
-    },
-    "wheel_12": {
-      "sensor_num": 8,
-      "min_t": 20.0,
-      "max_t": 30.0,
-      "standard_t": 25.0,
-      "min_p": -1.0,
-      "max_p": 3.0,
-      "standard_p": 2.0
+      "min_t": 40.0,
+      "max_t": 80.0,
+      "standard_t": 65.0,
+      "min_p": 4.5,
+      "max_p": 7.5,
+      "standard_p": 6.0
     }
   },
   {
-    "id": 4,
-    "id_car": 4,
+    "id": 6,
+    "id_car": 6,
     "count": 4,
     "brand_wheel": "",
     "wheel_2": {
       "sensor_num": 1,
-      "min_t": 20.0,
-      "max_t": 30.0,
-      "standard_t": 25.0,
-      "min_p": -1.0,
+      "min_t": 25.0,
+      "max_t": 85.0,
+      "standard_t": 50.0,
+      "min_p": 1.0,
       "max_p": 3.0,
       "standard_p": 2.0
     },
     "wheel_3": {
       "sensor_num": 2,
-      "min_t": 20.0,
-      "max_t": 30.0,
-      "standard_t": 25.0,
-      "min_p": -1.0,
-      "max_p": 3.0,
-      "standard_p": 2.0
-    },
-    "wheel_6": {
-      "sensor_num": 3,
-      "min_t": 20.0,
-      "max_t": 30.0,
-      "standard_t": 25.0,
-      "min_p": -1.0,
-      "max_p": 3.0,
-      "standard_p": 2.0
-    },
-    "wheel_7": {
-      "sensor_num": 4,
-      "min_t": 20.0,
-      "max_t": 30.0,
-      "standard_t": 25.0,
-      "min_p": -1.0,
-      "max_p": 3.0,
-      "standard_p": 2.0
-    },
-    "wheel_9": {
-      "sensor_num": 5,
-      "min_t": 20.0,
-      "max_t": 30.0,
-      "standard_t": 25.0,
-      "min_p": -1.0,
-      "max_p": 3.0,
-      "standard_p": 2.0
-    },
-    "wheel_10": {
-      "sensor_num": 6,
-      "min_t": 20.0,
-      "max_t": 30.0,
-      "standard_t": 25.0,
-      "min_p": -1.0,
-      "max_p": 3.0,
-      "standard_p": 2.0
-    },
-    "wheel_11": {
-      "sensor_num": 7,
-      "min_t": 20.0,
-      "max_t": 30.0,
-      "standard_t": 25.0,
-      "min_p": -1.0,
-      "max_p": 3.0,
-      "standard_p": 2.0
-    },
-    "wheel_12": {
-      "sensor_num": 8,
-      "min_t": 20.0,
-      "max_t": 30.0,
-      "standard_t": 25.0,
-      "min_p": -1.0,
-      "max_p": 3.0,
-      "standard_p": 2.0
-    },
-    "wheel_13": {
-      "sensor_num": 9,
-      "min_t": 20.0,
-      "max_t": 30.0,
-      "standard_t": 25.0,
-      "min_p": -1.0,
-      "max_p": 3.0,
-      "standard_p": 2.0
-    },
-    "wheel_14": {
-      "sensor_num": 10,
-      "min_t": 20.0,
-      "max_t": 30.0,
-      "standard_t": 25.0,
-      "min_p": -1.0,
-      "max_p": 3.0,
-      "standard_p": 2.0
-    },
-    "wheel_15": {
-      "sensor_num": 11,
-      "min_t": 20.0,
-      "max_t": 30.0,
-      "standard_t": 25.0,
-      "min_p": -1.0,
-      "max_p": 3.0,
-      "standard_p": 2.0
-    },
-    "wheel_16": {
-      "sensor_num": 12,
-      "min_t": 20.0,
-      "max_t": 30.0,
-      "standard_t": 25.0,
-      "min_p": -1.0,
+      "min_t": 25.0,
+      "max_t": 80.0,
+      "standard_t": 50.0,
+      "min_p": 1.0,
       "max_p": 3.0,
       "standard_p": 2.0
     }
