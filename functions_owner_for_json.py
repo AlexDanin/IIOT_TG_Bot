@@ -105,7 +105,7 @@ def get_rej_app(company):
         file_2 = json.load(json_file2)
     ans_ = ""
     for j in list_:
-        ans_ += f"ID анкеты = {j['Anket_id']} ФИО водителя = {file_2[int(j['Anket_id']-1)]['Full_name']}\n"
+        ans_ += f"ID анкеты = {j['Anket_id']} ФИО водителя = {file_2[int(j['Anket_id'] - 1)]['Full_name']}\n"
     return str(ans_)
 
 
@@ -117,7 +117,7 @@ def get_g_app(company):
         file_2 = json.load(json_file2)
     ans_ = ""
     for j in list_:
-        ans_ += f"ID анкеты = {j['Anket_id']} ФИО водителя = {file_2[int(j['Anket_id']-1)]['Full_name']}\n"
+        ans_ += f"ID анкеты = {j['Anket_id']} ФИО водителя = {file_2[int(j['Anket_id'] - 1)]['Full_name']}\n"
     return str(ans_)
 
 
@@ -130,7 +130,7 @@ def get_unw_app(company):
 def rej_applications_(message, anket_id):
     with open('data/Ankets.json', 'r', encoding='utf-8') as f:
         data = json.load(f)
-    data[int(anket_id)-1]['Status'] = 'Отклонён'
+    data[int(anket_id) - 1]['Status'] = 'Отклонён'
     with open('data/Ankets.json', 'w', encoding='utf-8') as f:
         json.dump(data, f, ensure_ascii=False)
 
@@ -138,8 +138,8 @@ def rej_applications_(message, anket_id):
 def proof_applications_(chat_id, anket_id):
     with open('data/Ankets.json', 'r', encoding='utf-8') as f:
         data = json.load(f)
-    data[int(anket_id)-1]['Status'] = 'Удтверждён'
-    driver_id = data[int(anket_id)-1]['driver_id']
+    data[int(anket_id) - 1]['Status'] = 'Удтверждён'
+    driver_id = data[int(anket_id) - 1]['driver_id']
 
     with open('data/Ankets.json', 'w', encoding='utf-8') as f:
         json.dump(data, f, ensure_ascii=False)
@@ -164,10 +164,10 @@ def proof_applications_(chat_id, anket_id):
 def get_one_anket(anket_id):
     with open("data/Ankets.json", "r", encoding="utf-8") as json_file:
         file_ = json.load(json_file)
-        driver_id = file_[int(anket_id)-1]["driver_id"]
+        driver_id = file_[int(anket_id) - 1]["driver_id"]
     with open("data/Drivers.json", "r", encoding="utf-8") as json_file2:
         file_2 = json.load(json_file2)
-        driver = file_2[driver_id-1]["Full_name"]
+        driver = file_2[driver_id - 1]["Full_name"]
     return f"ID анкеты = {anket_id} ФИО водителя = {driver}"
 
 
@@ -219,4 +219,13 @@ def get_wheels_data(car_id):
 
     for i in range(len(data)):
         if data[i]["id_car"] == car_id:
+            return data[i]
+
+
+def get_sensors_data(car_id):
+    with open('data/Sensors_Data.json', 'r', encoding="utf-8") as file:
+        data = json.load(file)
+
+    for i in data:
+        if int(i) == car_id:
             return data[i]

@@ -304,17 +304,20 @@ def get_current_state_data(message, value):
 
     wheel = get_wheels_data(int(value) + 1)
     print(wheel)
+    sensors = get_sensors_data((int(value) + 1))
 
     j = 1
+    x = 1
     for i in range(1, int(cars[int(value)]['wheels']) + 1):
         lst_w = []
         for _ in range(1, 5):
             print(f"wheel_{j}")
             if f"wheel_{j}" in wheel.keys():
-                lst_w.append(types.InlineKeyboardButton(f"{randint(10, 90)}°С | {randint(3, 9)} Бар", callback_data='Noneee'))
+                lst_w.append(types.InlineKeyboardButton(f"{sensors[f'sens_{x}']['temp'][-1]}°С | {sensors[f'sens_{x}']['pres'][-1]} Бар", callback_data='Noneee'))
             else:
                 lst_w.append(types.InlineKeyboardButton(" ", parse_mode='html', callback_data='Noneee'))
             j += 1
+            x += 1
         markup.row(*lst_w)
 
         # # data = get_state(i)

@@ -5,5 +5,12 @@
     "car_id": "/start",
     "driver_id": "DED",
     "describe": "/start"
+  },
+  {
+    "Type1": "Механическая",
+    "Type2": "Шины",
+    "car_id": "А555АА196",
+    "driver_id": "qwerty",
+    "describe": "Лопнула"
   }
 ]

@@ -5,14 +5,15 @@ client = mqtt.Client(mqtt.CallbackAPIVersion.VERSION2)
 client.username_pw_set(username="algalar_the_best", password="1Qaz2Wsx")
 
 # Подключаемся к брокеру
-client.connect("95.213.151.166", 1883, 60)
+client.connect("5.188.138.91", 1883, 60)
 
 # Отправляем сообщение в топик
-client.publish(f"1/state_number", "A555AA196")
-# client.publish(f"1/quest", "get wheels")
-# client.publish("1/quest", "wheel_3")
-# client.publish("1/quest", "get wheels")
-# client.publish("1/quest", "get wheels")
+client.publish(f"device1/state_number", "8HPH19")
+# client.publish(f"device2/topic2", "uuu")
+# client.publish(f"100/quest", "get wheels")
+# client.publish("100/quest", "wheel_3")
+# client.publish("100/quest", "get wheels")
+# client.publish("100/quest", "get wheels")
 
 # Отключаемся от брокера
 client.disconnect()
